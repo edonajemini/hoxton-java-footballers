@@ -8,10 +8,7 @@ import javax.persistence.Id;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,23 +22,12 @@ public class PlayerController {
     public List<Player> getAllPlayers() {
         return PlayerRepository.findAll();
     }
-
+    
     @PostMapping("/players")
     public Player createNewPlayer(@RequestBody Player PlayerData) {
         return PlayerRepository.save(PlayerData);
     }
 
-    @DeleteMapping("/player/{id}")
-    public String deletePlayer(@PathVariable Integer id) {
-        PlayerRepository.deleteById(id);
-        return "PLAYER SUCCESSFULLY DELETED!";
-    }
-
-    @PatchMapping("/players/{id}")
-    public Player updatePlayer(@RequestBody Player PlayerData, @PathVariable Integer id) {
-        PlayerData.id = id;
-        return PlayerRepository.save(PlayerData);
-    }
 }
 
 @Entity
